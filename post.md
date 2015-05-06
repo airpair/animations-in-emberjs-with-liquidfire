@@ -190,7 +190,7 @@ Liquid-fire uses [Velocity.js](http://julian.com/research/velocity/) as its anim
 
 This has been really basic stuff so far, so let's up our game and see some flashy animations that will leave you in awe (at least it did me).
 
-I will use examples from [Edward's Physical Design talk](http://www.youtube.com/watch?v=p8aF-7-_cE8) that he [presented at EmberConf]. The repository has been made public and so you can see all of it [here]((https://github.com/ef4/physical-design-demo).
+I will use examples from [Edward's Physical Design talk](http://www.youtube.com/watch?v=p8aF-7-_cE8) that he presented at EmberConf. The code has been made public and so you can see all of it [here](https://github.com/ef4/physical-design-demo).
 
 The demo uses [the speakers page of the conference](http://emberconf.com/speakers.html) but made into an Ember application by scraping the data and building an Ember app on top.
 
