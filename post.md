@@ -306,3 +306,7 @@ That concludes our little "up & running" post for animations in Ember.js. Hopefu
 
 I recommend checking out [the official documentation](http://ef4.github.io/liquid-fire/), which is, true to the project's awesomeness, an interactive Ember application using liquid-fire.
 
+### My little plug
+
+I am really enthusiastic about Ember and the ease with which one can develop great applications with it (I hope this article demonstrates that fact regarding animations). So much so, that after authoring several popular [blog](http://balinterdi.com/2014/06/26/ember-gotcha-controllers-are-singletons.html?utm_source=airpair&utm_medium=referral&utm_campaign=guest-blogging) [posts](http://balinterdi.com/2014/03/05/sorting-arrays-in-ember-dot-js-by-various-criteria.html?utm_source=airpair&utm_medium=referral&utm_campaign=guest-blogging) about Ember, I wrote a book that helps to smooth out the learning curve. [Check it out](http://balinterdi.com/rock-and-roll-with-emberjs/?utm_source=airpair&utm_medium=referral&utm_campaign=guest-blogging) if you want to learn this great framework!
+
