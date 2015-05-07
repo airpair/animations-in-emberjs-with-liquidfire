@@ -1,6 +1,6 @@
 ## A brief history
 
-Back in the summer of 2014 Ember has had a great routing and testing story and with Ember CLI, it was on course to have probably the best tool for building front-end tools. There were, however, a few areas where it still lacked a standard way of doing things and animation was one of them.
+Back in the summer of 2014 Ember has had a great routing and testing story and with Ember CLI, it was on course to have probably the best tool for building front-end applications. There were, however, a few areas where it still lacked a standard way of doing things and animation was one of them.
 
 That all changed when [Edward Faulkner](https://twitter.com/eaf4) started developing liquid-fire which has now become the de facto standard for adding animations to your Ember application.
 
@@ -24,7 +24,7 @@ There are three components of an animation in liquid-fire, the *transition map*,
 
 ### Transition map
 
-The transition map is similar to the routing map. Just as the routing map defines the routes of the Ember application, the transition map defines the transitions. The map lives under `app/transitions.js` and has the following syntax:
+The transition map is similar to the routing map. Just as the routing map defines the routes of an Ember application, the transition map defines the transitions. The map lives under `app/transitions.js` and has the following syntax:
 
 ```javascript
 export default function(){
@@ -38,9 +38,9 @@ export default function(){
 }
 ```
 
-Each call to `this.transition` defines a rule. Its arguments define constraints (*when* that transition should be triggered) and which animation(s) should be used if all constraints are matched.
+Each call to `this.transition` defines a rule. Its arguments define constraints (*when* that transition should be triggered) and declare which animation(s) should be used if all constraints are matched.
 
-In the above example `this.fromRoute` and `this.toRoute` constrain the transition to be activated if the route changes from `band.songs` to `band.details` and specify the `toRight` animation to be used. The last argument, `this.reverse` is a nifty shorthand that says that if the transition happens in the other direction, from `band.details` to `band.songs`, the `toLeft` animation should be employed.
+In the above example `this.fromRoute` and `this.toRoute` constrain the transition to be activated only if the route changes from `band.songs` to `band.details` and specify the `toRight` animation to be used. The last argument, `this.reverse` is a nifty shorthand that says that if the transition happens in the other direction, from `band.details` to `band.songs`, the `toLeft` animation should be employed.
 
 That brings us to our second component, the animation functions.
 
@@ -180,7 +180,7 @@ export default function(){
 );
 ```
 
-`hasClass` is a contstraint that will filter the matching elements to those that have the passed CSS class (that's why we added the `band-description` class in the previous step). `toValue` can be used in conjuction with helpers that observe a value. Here, the value passed to `liquid-if` is `isEditing` which is a boolean. We want to animate the transition when the user switches to edit-mode, but not when they flip back to display-mode, so we pass `true` as the argument for `toValue`. Finally, we define that the built-in `fade` animation should be used and it should take 500 milliseconds.
+`hasClass` is a constraint that will filter the matching elements to those that have the passed CSS class (that's why we added the `band-description` class in the previous step). `toValue` can be used in conjuction with helpers that observe a value. Here, the value passed to `liquid-if` is `isEditing` which is a boolean. We want to animate the transition when the user switches to edit-mode, but not when they flip back to display-mode, so we pass `true` as the argument for `toValue`. Finally, we define that the built-in `fade` animation should be used and it should take 500 milliseconds.
 
 Liquid-fire uses [Velocity.js](http://julian.com/research/velocity/) as its animation library and its `animate` function passes parameters through to Velocity.js, like the `{ duration: 500 }` option above.
 
@@ -298,10 +298,11 @@ We are already familiar with the `fromRoute` and `toRoute` constraints, so let's
 
 Finally, a reverse transition is defined. The one matching speaker photo flies back to the list while the other ones slide in from the left (heading to the right).
 
+Since router transitions change the URL and add an item to the browser's history, even the browser's Back button triggers the animation, something hitherto unheard of (see the third time I trigger the animation on the last video when I go off-camera).
+
 ### Go forth and animate
 
 That concludes our little "up & running" post for animations in Ember.js. Hopefully you now have a solid base for adding animations to your Ember apps.
 
 I recommend checking out [the official documentation](http://ef4.github.io/liquid-fire/), which is, true to the project's awesomeness, an interactive Ember application using liquid-fire.
 
-Before you leave, though, I have a question for you: before liquid-fire, have you ever seen the browser's Back button animate?
