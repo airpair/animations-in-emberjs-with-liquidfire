@@ -48,24 +48,27 @@ That brings us to our second component, the animation functions.
 
 The animation functions implement the actual animation from the old state to the new state. Each animation function resides in its own module and exports a single function.
 
-A non-working example would look like this:
+A example would look like this:
 
 ```javascript,linenums=true
-import { animate } from "liquid-fire";
+import { animate, stop, Promise } from "liquid-fire";
 
-export default function doubleHelix(opts) {
-  var self = this;
-  return animate(this.oldElement, params, opts).then(function() {
-    return animate(self.newElement, ...);
-  });
+export default function crossFade(opts) {
+  opts = opts || {};
+  stop(this.oldElement);
+  return Promise.all([
+    animate(this.oldElement, { opacity: 0 }, opts),
+    animate(this.newElement, { opacity: [ (opts.maxOpacity || 1), 0 ] }, opts)
+  ]);
 }
 ```
 
-`animate` is the main primitive liquid-fire provides to define custom animations. It returns a promise which gives a simple API to order animations (above, animating `newElement` will only begin after oldElement has fully finished animating).
+`animate` is a useful helper liquid-fire provides to define custom animations with [Velocity.js](http://julian.com/research/velocity/). It returns a promise which gives a simple API to compose animations.
+However, using `animate` (and Velocity.js, for that matter) is optional. Animations can be implemented using any technique or library as long as they return a promise from the animation function.
 
-If the above content was stored in `app/transitions/double-helix.js`, it would give us an animation name of `double-helix` that we could use as the argument to `this.use` (and `this.reverse`) in the transition map.
+If the above content was stored in `app/transitions/cross-fade.js`, it would give us an animation name of `cross-fade` that we could use as the argument to `this.use` (and `this.reverse`) in the transition map.
 
-The good news is that a handful of animations come included in the library so we don't need to write any code for implementing animations while we familiarize ourselves with liquid-fire.
+The good news is that a handful of animations (like cross-fade, actually) come included in the library so we don't need to write any code for implementing animations while we familiarize ourselves with liquid-fire.
 
 ### Template helpers
 
@@ -181,8 +184,6 @@ export default function(){
 ```
 
 `hasClass` is a constraint that will filter the matching elements to those that have the passed CSS class (that's why we added the `band-description` class in the previous step). `toValue` can be used in conjuction with helpers that observe a value. Here, the value passed to `liquid-if` is `isEditing` which is a boolean. We want to animate the transition when the user switches to edit-mode, but not when they flip back to display-mode, so we pass `true` as the argument for `toValue`. Finally, we define that the built-in `fade` animation should be used and it should take 500 milliseconds.
-
-Liquid-fire uses [Velocity.js](http://julian.com/research/velocity/) as its animation library and its `animate` function passes parameters through to Velocity.js, like the `{ duration: 500 }` option above.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/sjzrsnZxEO4" frameborder="0" allowfullscreen></iframe>
 
